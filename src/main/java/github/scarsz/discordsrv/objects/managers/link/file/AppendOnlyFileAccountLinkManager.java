@@ -35,6 +35,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,11 +52,22 @@ public class AppendOnlyFileAccountLinkManager extends AbstractFileAccountLinkMan
 
     @Override
     void load() throws IOException {
+        readAOF();
+        importJsonFile();
+    }
+
+    private void importJsonFile() throws IOException {
         File linkedAccountsJsonFile = new File(DiscordSRV.getPlugin().getDataFolder(), "linkedaccounts.json");
         if (linkedAccountsJsonFile.exists()) {
             @SuppressWarnings("deprecation") JsonFileAccountLinkManager manager = new JsonFileAccountLinkManager();
-            manager.getLinkedAccounts().forEach(this::link);
-            int count = manager.getLinkedAccountCount();
+            AtomicInteger count = new AtomicInteger();
+            manager.linkedAccounts.forEach((discordId, uuid) -> {
+                if (!linkedAccounts.containsKey(discordId)) {
+                    linkedAccounts.put(discordId, uuid);
+                    count.getAndIncrement();
+                }
+            });
+            save();
 
             File newFile = new File(DiscordSRV.getPlugin().getDataFolder(), "linkedaccounts.json.delete");
             if (!linkedAccountsJsonFile.renameTo(newFile)) {
@@ -63,7 +75,9 @@ public class AppendOnlyFileAccountLinkManager extends AbstractFileAccountLinkMan
             }
             DiscordSRV.info("Migrated " + count + " linked accounts to AOF file backend");
         }
+    }
 
+    private void readAOF() throws IOException {
         File file = getFile();
         if (!file.exists() || file.length() == 0) return;
         String fileContent = FileUtils.readFileToString(file, "UTF-8");

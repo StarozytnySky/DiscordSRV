@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 public class CommandLanguage {
 
     @Command(commandNames = { "language", "setlanguage", "lang", "setlang" },
-            helpMessage = "Changes the language of DiscordSRV to whatever is specified.",
+            helpMessage = "Zmien jezyk we wtycze.",
             permission = "discordsrv.language",
             usageExample = "language japanese"
     )

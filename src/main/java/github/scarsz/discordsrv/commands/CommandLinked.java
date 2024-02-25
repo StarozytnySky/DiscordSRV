@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 public class CommandLinked {
 
     @Command(commandNames = { "linked" },
-            helpMessage = "Checks what Discord user your (or someone else's) MC account is linked to",
+            helpMessage = "Sprawdz z jakim kontem jest powiazane Twoje konto discord",
             permission = "discordsrv.linked"
     )
     public static void execute(CommandSender sender, String[] args) {

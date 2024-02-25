@@ -43,7 +43,7 @@ import java.util.UUID;
 public class CommandLink {
 
     @Command(commandNames = { "link" },
-            helpMessage = "Generates a code to link your Minecraft account to your Discord account",
+            helpMessage = "Wygeneruj kod umozliwiajacy polaczenie konta z discord",
             permission = "discordsrv.link"
     )
     public static void execute(CommandSender sender, String[] args) {

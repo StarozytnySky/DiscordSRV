@@ -65,7 +65,7 @@ public class DiscordAccountLinkListener extends ListenerAdapter {
 
         Message receivedMessage = event.getMessage();
         String reply = DiscordSRV.getPlugin().getAccountLinkManager().process(receivedMessage.getContentRaw(), event.getAuthor().getId());
-        if (reply != null) {
+        if (reply != null && !reply.isEmpty()) {
             receivedMessage.reply(reply).queue(replyMessage -> {
                 // delete the message after a delay if the config option is enabled
                 int deleteSeconds = DiscordSRV.config().getIntElse("MinecraftDiscordAccountLinkedMessageDeleteSeconds", 0);

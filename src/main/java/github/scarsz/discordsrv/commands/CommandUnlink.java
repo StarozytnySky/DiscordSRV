@@ -44,7 +44,7 @@ import static github.scarsz.discordsrv.commands.CommandLinked.*;
 public class CommandUnlink {
 
     @Command(commandNames = { "unlink", "clearlinked" },
-            helpMessage = "Unlinks your Minecraft account from your Discord account",
+            helpMessage = "Odlacz konto minecraft od konta Discord",
             permission = "discordsrv.unlink"
     )
     public static void execute(CommandSender sender, String[] args) {

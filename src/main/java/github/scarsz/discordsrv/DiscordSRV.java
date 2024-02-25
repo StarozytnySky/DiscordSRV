@@ -293,10 +293,10 @@ public class DiscordSRV extends JavaPlugin {
         return getMainTextChannel() != null
                 ? getMainTextChannel().getGuild()
                 : getConsoleChannel() != null
-                    ? getConsoleChannel().getGuild()
-                    : jda.getGuilds().size() > 0
-                        ? jda.getGuilds().get(0)
-                        : null;
+                ? getConsoleChannel().getGuild()
+                : jda.getGuilds().size() > 0
+                ? jda.getGuilds().get(0)
+                : null;
     }
     public TextChannel getConsoleChannel() {
         if (jda == null) return null;
@@ -546,7 +546,7 @@ public class DiscordSRV extends JavaPlugin {
                 DiscordSRV.updateChecked = true;
             }, 0, TimeUnit.SECONDS);
             updateChecker.scheduleAtFixedRate(() ->
-                    DiscordSRV.updateIsAvailable = UpdateUtil.checkForUpdates(false),
+                            DiscordSRV.updateIsAvailable = UpdateUtil.checkForUpdates(false),
                     6, 6, TimeUnit.HOURS
             );
         }
@@ -1588,8 +1588,8 @@ public class DiscordSRV extends JavaPlugin {
                 legacyCancellationDetector = new CancellationDetector<>(this, AsyncPlayerChatEvent.class, (listener, event) -> {
                     Plugin plugin = listener.getPlugin();
                     DiscordSRV.info("Plugin " + plugin + " cancelled AsyncPlayerChatEvent (Bukkit) "
-                                            + "(author: " + event.getPlayer().getName()
-                                            + " | message: " + event.getMessage() + ")");
+                            + "(author: " + event.getPlayer().getName()
+                            + " | message: " + event.getMessage() + ")");
                 });
 
                 try {
@@ -1601,7 +1601,7 @@ public class DiscordSRV extends JavaPlugin {
                             (listener, event) -> {
                                 Plugin plugin = listener.getPlugin();
                                 DiscordSRV.info("Plugin " + plugin + " cancelled AsyncChatEvent (Paper) " +
-                                                        "(author: " + event.getPlayer().getName() + ")");
+                                        "(author: " + event.getPlayer().getName() + ")");
                             });
                 } catch (ClassNotFoundException ignored) {}
 

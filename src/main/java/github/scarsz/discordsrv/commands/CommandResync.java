@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class CommandResync {
 
     @Command(commandNames = { "resync" },
-            helpMessage = "Resynchronizes all groups & roles",
+            helpMessage = "Ponowna synchronizacja wszystkich grup i rol",
             permission = "discordsrv.resync"
     )
     public static void execute(CommandSender sender, String[] args) {

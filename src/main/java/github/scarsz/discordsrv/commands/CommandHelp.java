@@ -48,9 +48,9 @@ public class CommandHelp {
     }};
 
     @Command(commandNames = { "?", "help" },
-            helpMessage = "Shows command help for DiscordSRV's commands",
-            permission = "discordsrv.help",
-            usageExample = "help [command]"
+            helpMessage = "Wyswietl dostepne komendy",
+            permission = "discordsrv.help"
+            //usageExample = "help [command]"
     )
     public static void execute(CommandSender sender, String[] args) {
         if (args.length == 0) {
@@ -71,7 +71,7 @@ public class CommandHelp {
         for (Method method : DiscordSRV.getPlugin().getCommandManager().getCommands().values())
             if (!commandMethods.contains(method)) commandMethods.add(method);
 
-        MessageUtil.sendMessage(sender, ChatColor.DARK_GRAY + "================[ " + titleColor + "DiscordSRV" + ChatColor.DARK_GRAY + " ]================");
+        MessageUtil.sendMessage(sender, ChatColor.DARK_GRAY + "=========[ " + titleColor + "Synchronizacja Discord" + ChatColor.DARK_GRAY + " ]=========");
         for (Method commandMethod : commandMethods) {
             Command commandAnnotation = commandMethod.getAnnotation(Command.class);
 

@@ -31,6 +31,7 @@ import github.scarsz.discordsrv.util.PluginUtil;
 import github.scarsz.discordsrv.util.PrettyUtil;
 import github.scarsz.discordsrv.util.SchedulerUtil;
 import lombok.Getter;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
@@ -47,7 +48,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class AbstractAccountLinkManager extends AccountLinkManager {
+public abstract class AbstractAccountLinkManager implements AccountLinkManager {
 
     @Getter
     protected final Map<String, UUID> linkingCodes = new ConcurrentHashMap<>();
@@ -106,7 +107,7 @@ public abstract class AbstractAccountLinkManager extends AccountLinkManager {
                 DiscordSRV.debug(Debug.ACCOUNT_LINKING, "Command was blank, skipping");
                 continue;
             }
-            if (PluginUtil.pluginHookIsEnabled("placeholderapi")) command = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(Bukkit.getPlayer(uuid), command);
+            if (PluginUtil.pluginHookIsEnabled("placeholderapi")) command = PlaceholderAPI.setPlaceholders(Bukkit.getPlayer(uuid), command);
 
             String finalCommand = command;
             DiscordSRV.debug(Debug.ACCOUNT_LINKING, "Final command to be run: /" + finalCommand);
@@ -186,7 +187,7 @@ public abstract class AbstractAccountLinkManager extends AccountLinkManager {
                     .replace("%discordname%", user != null ? user.getName() : "")
                     .replace("%discorddisplayname%", PrettyUtil.beautify(user, "", false));
             if (StringUtils.isBlank(command)) continue;
-            if (PluginUtil.pluginHookIsEnabled("placeholderapi")) command = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(Bukkit.getPlayer(uuid), command);
+            if (PluginUtil.pluginHookIsEnabled("placeholderapi")) command = PlaceholderAPI.setPlaceholders(Bukkit.getPlayer(uuid), command);
 
             String finalCommand = command;
             SchedulerUtil.runTask(DiscordSRV.getPlugin(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));
